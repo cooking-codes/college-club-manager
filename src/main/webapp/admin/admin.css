@@ -1,0 +1,439 @@
+
+/* =========================================================
+   ARMIET ADMIN PORTAL
+   Maroon + Gold + Black Theme
+   ========================================================= */
+
+:root {
+    --maroon: #6d1028;
+    --maroon-dark: #470a1a;
+    --maroon-deep: #2a0711;
+    --gold: #c7a23a;
+    --gold-bright: #e0bf55;
+    --gold-dark: #9b771d;
+
+    --black: #15171b;
+    --black-soft: #242831;
+
+    --cream: #fbfaf7;
+    --white: #ffffff;
+    --text: #252932;
+    --muted: #667080;
+    --line: #e6e2dc;
+
+    --success: #176b45;
+    --success-bg: #eef8f2;
+    --danger: #a92727;
+    --danger-bg: #fff1f1;
+
+    --shadow: 0 4px 18px rgba(42, 7, 17, 0.10);
+}
+
+/* ---------- Base ---------- */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+}
+
+/* ---------- Admin Navigation ---------- */
+
+.navbar {
+    background: var(--black);
+    border-bottom: 4px solid var(--gold);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+}
+
+.nav-container {
+    max-width: 1180px;
+    margin: auto;
+    min-height: 86px;
+    padding: 12px 20px;
+
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+/* ARMIET badge */
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    color: var(--white);
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.brand-badge {
+    width: 50px;
+    height: 50px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+    background: var(--maroon);
+    border: 2px solid var(--gold);
+
+    color: var(--white);
+    font-size: 0.8rem;
+    font-weight: 900;
+}
+
+.brand-titles {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.brand-college-name {
+    color: var(--white);
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.brand-portal-title {
+    color: var(--gold-bright);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* ---------- Navigation links ---------- */
+
+.nav-links {
+    list-style: none;
+    margin: 0 0 0 auto;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.nav-links li {
+    margin: 0;
+}
+
+.nav-links a {
+    display: block;
+
+    padding: 11px 14px;
+
+    border-radius: 7px;
+
+    color: #eee;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+.nav-links a:hover {
+    background: var(--maroon);
+    color: var(--gold-bright);
+}
+
+.nav-links a.active {
+    background: var(--maroon);
+    color: var(--white);
+    box-shadow: inset 0 -3px 0 var(--gold);
+}
+
+/* Logout */
+
+.btn-danger {
+    background: #a92727 !important;
+    color: white !important;
+}
+
+.btn-danger:hover {
+    background: #7e1d1d !important;
+}
+
+/* ---------- Main container ---------- */
+
+.container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 42px 24px 55px;
+}
+
+/* ---------- Page Header ---------- */
+
+.page-header {
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    margin: 0 0 8px;
+
+    color: var(--maroon-dark);
+    font-size: 2.3rem;
+    font-weight: 900;
+}
+
+.page-header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1rem;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+    display: inline-block;
+
+    padding: 10px 17px;
+
+    border: 1px solid transparent;
+    border-radius: 7px;
+
+    text-decoration: none;
+    font-weight: 700;
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.btn-primary {
+    background: var(--maroon);
+    color: var(--white);
+    border-color: var(--maroon);
+}
+
+.btn-primary:hover {
+    background: var(--maroon-dark);
+    border-color: var(--maroon-dark);
+}
+
+.btn-accent {
+    background: var(--gold);
+    color: var(--maroon-deep);
+    border-color: var(--gold);
+}
+
+.btn-accent:hover {
+    background: var(--gold-bright);
+}
+
+/* ---------- Statistics ---------- */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+
+    margin-bottom: 38px;
+}
+
+.stat-card {
+    padding: 24px 16px;
+
+    background: var(--white);
+
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--maroon);
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    box-shadow: var(--shadow);
+
+    transition: 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    border-top-color: var(--gold);
+}
+
+.stat-value {
+    color: var(--maroon);
+    font-size: 2.1rem;
+    font-weight: 900;
+}
+
+.stat-label {
+    margin-top: 8px;
+
+    color: var(--black);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+/* ---------- Cards ---------- */
+
+.card {
+    overflow: hidden;
+
+    background: var(--white);
+
+    border: 1px solid var(--line);
+    border-radius: 11px;
+
+    box-shadow: var(--shadow);
+}
+
+.card h3 {
+    color: var(--maroon);
+}
+
+/* ---------- Tables ---------- */
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+}
+
+.data-table th {
+    padding: 13px 14px;
+
+    background: var(--maroon);
+    color: var(--white);
+
+    text-align: left;
+
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+}
+
+.data-table td {
+    padding: 13px 14px;
+
+    border-bottom: 1px solid var(--line);
+
+    color: var(--text);
+    font-size: 0.88rem;
+}
+
+.data-table tbody tr:hover {
+    background: #fffaf0;
+}
+
+/* ---------- Status badges ---------- */
+
+.card-badge {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 5px 9px;
+
+    border-radius: 999px;
+
+    font-size: 0.72rem;
+    font-weight: 800;
+}
+
+.badge-upcoming {
+    background: var(--success-bg);
+    color: var(--success);
+}
+
+.badge-full,
+.badge-closed {
+    background: var(--danger-bg);
+    color: var(--danger);
+}
+
+/* ---------- Footer ---------- */
+
+footer {
+    margin-top: auto;
+
+    background: var(--black);
+    color: #ddd;
+
+    border-top: 4px solid var(--gold);
+}
+
+.footer-bottom {
+    max-width: 1180px;
+    margin: auto;
+
+    padding: 18px 24px;
+
+    text-align: center;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #ddd;
+    font-size: 0.82rem;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1000px) {
+
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .nav-container {
+        flex-wrap: wrap;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: center;
+        margin: 0;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 650px) {
+
+    .container {
+        padding: 28px 15px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .brand-college-name {
+        font-size: 0.9rem;
+    }
+
+    .brand-portal-title {
+        font-size: 0.68rem;
+    }
+
+    .nav-links {
+        gap: 3px;
+    }
+
+    .nav-links a {
+        padding: 8px 9px;
+        font-size: 0.78rem;
+    }
+
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
+}

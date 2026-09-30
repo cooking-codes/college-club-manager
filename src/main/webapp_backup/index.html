@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARMIET - Student Club & Event Management Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Institutional Top Notice Bar -->
+    <div class="top-notice-bar">
+        Alamuri Ratnamala Institute of Engineering & Technology <span>| A.S. Rao Nagar, Vill. Sapgaon, Tal. Shahapur, Dist. Thane ? 421601</span>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="brand-badge">ARMIET</span>
+                <div class="brand-titles">
+                    <span class="brand-college-name">Alamuri Ratnamala Institute of Engineering & Technology</span>
+                    <span class="brand-portal-title">Student Club & Event Management Portal</span>
+                </div>
+            </a>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation">?</button>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="clubs.html">Clubs</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="my-registrations.html">My Registrations</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="admin/login.html" class="admin-btn">Admin Portal</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-pill">Alamuri Ratnamala Institute of Engineering & Technology</div>
+            <h1>Student Life at ARMIET</h1>
+            <div class="hero-tagline">Discover. Participate. Connect.</div>
+            <p>Explore student clubs, technical activities, cultural events, sports activities and opportunities across Alamuri Ratnamala Institute of Engineering & Technology.</p>
+            <div class="hero-actions">
+                <a href="clubs.html" class="btn btn-accent">Explore Clubs</a>
+                <a href="events.html" class="btn btn-secondary">Upcoming Events</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Container -->
+    <main class="container">
+
+        <!-- Live Platform Stats (Real Database Counts) -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" id="stat-clubs">-</div>
+                <div class="stat-label">Registered Clubs</div>
+                <div class="stat-subtext">Active student bodies</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-events">-</div>
+                <div class="stat-label">Upcoming Events</div>
+                <div class="stat-subtext">Workshops & competitions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-students">-</div>
+                <div class="stat-label">Enrolled Students</div>
+                <div class="stat-subtext">Profiles in database</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-memberships">-</div>
+                <div class="stat-label">Active Registrations</div>
+                <div class="stat-subtext">Memberships & event bookings</div>
+            </div>
+        </section>
+
+        <!-- Student Hub Features Grid -->
+        <section style="margin-bottom: 3.5rem;">
+            <div class="section-header">
+                <div>
+                    <h2>Student Portal Services</h2>
+                    <p>Direct access to club discovery, competition registrations, and record management.</p>
+                </div>
+            </div>
+            <div class="student-hub-grid">
+                <a href="clubs.html" class="student-hub-card">
+                    <div class="hub-icon-box">???</div>
+                    <div class="hub-card-body">
+                        <h3>Browse Clubs</h3>
+                        <p>Explore all technical, cultural, literary, and innovation societies on campus.</p>
+                    </div>
+                </a>
+                <a href="club-register.html" class="student-hub-card">
+                    <div class="hub-icon-box">??</div>
+                    <div class="hub-card-body">
+                        <h3>Join a Club</h3>
+                        <p>Submit your membership application to join committees and student teams.</p>
+                    </div>
+                </a>
+                <a href="events.html" class="student-hub-card">
+                    <div class="hub-icon-box">??</div>
+                    <div class="hub-card-body">
+                        <h3>Browse Events</h3>
+                        <p>Stay informed about collegiate hackathons, fests, debates, and sports meets.</p>
+                    </div>
+                </a>
+                <a href="event-register.html" class="student-hub-card">
+                    <div class="hub-icon-box">???</div>
+                    <div class="hub-card-body">
+                        <h3>Register for Events</h3>
+                        <p>Secure tickets and seats for upcoming competitions with real-time slot checking.</p>
+                    </div>
+                </a>
+                <a href="my-registrations.html" class="student-hub-card">
+                    <div class="hub-icon-box">??</div>
+                    <div class="hub-card-body">
+                        <h3>View My Registrations</h3>
+                        <p>Look up your registered events and confirmed participation status by Roll Number.</p>
+                    </div>
+                </a>
+                <a href="my-registrations.html" class="student-hub-card">
+                    <div class="hub-icon-box">???</div>
+                    <div class="hub-card-body">
+                        <h3>Track Club Memberships</h3>
+                        <p>Verify your official club affiliations and approval status recorded in MySQL.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Featured Clubs Section (Dynamic DB Data) -->
+        <section style="margin-bottom: 3.5rem;">
+            <div class="section-header">
+                <div>
+                    <h2>Campus Clubs & Organizations</h2>
+                    <p>Student-led societies fostering technical expertise, leadership, and extracurricular excellence.</p>
+                </div>
+                <a href="clubs.html" class="btn btn-outline btn-sm">View All Clubs &rarr;</a>
+            </div>
+            <div class="cards-grid" id="featured-clubs-container"></div>
+        </section>
+
+        <!-- Upcoming Events Section (Dynamic DB Data) -->
+        <section style="margin-bottom: 3.5rem;">
+            <div class="section-header">
+                <div>
+                    <h2>Upcoming Campus Events</h2>
+                    <p>Competitions, technical seminars, and cultural festivals scheduled at ARMIET.</p>
+                </div>
+                <a href="events.html" class="btn btn-outline btn-sm">View All Events &rarr;</a>
+            </div>
+            <div class="cards-grid" id="upcoming-events-container"></div>
+        </section>
+
+        <!-- ARMIET Institutional Highlights Section -->
+        <section class="armiet-highlights-box">
+            <h2 style="font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem;">Institutional Activities & Student Chapters at ARMIET</h2>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">
+                Alamuri Ratnamala Institute of Engineering & Technology provides structured institutional platforms supporting student engineering innovation and civic engagement.
+            </p>
+            <div class="armiet-highlights-grid">
+                <div class="highlight-item">
+                    <h4>MESA</h4>
+                    <p>Mechanical Engineering Students Association coordinating Technical Quizzes, Design Contests, Paper Presentations, RoboRace, and RoboWar prototyping.</p>
+                </div>
+                <div class="highlight-item">
+                    <h4>NSS Unit</h4>
+                    <p>National Service Scheme unit at ARMIET focusing on community service, blood donation camps, cleanliness drives, and social welfare awareness.</p>
+                </div>
+                <div class="highlight-item">
+                    <h4>IEEE & ISTE Chapters</h4>
+                    <p>Student branches facilitating national technical symposiums, research paper workshops, and industry expert interactions.</p>
+                </div>
+                <div class="highlight-item">
+                    <h4>Sports & Athletics</h4>
+                    <p>Campus sports facilities and inter-departmental athletic tournaments (Spardha) promoting fitness, team spirit, and collegiate sportsmanship.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>ARMIET Campus Portal</h4>
+                <p><strong>Alamuri Ratnamala Institute of Engineering & Technology</strong></p>
+                <p>Student Club & Event Management Portal providing automated club administration, event registration, and real-time database tracking.</p>
+                <div class="footer-address">
+                    A.S. Rao Nagar, Vill. Sapgaon, Tal. Shahapur, Dist. Thane ? 421601
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="clubs.html">Browse Clubs</a></li>
+                    <li><a href="events.html">Campus Events</a></li>
+                    <li><a href="my-registrations.html">My Registrations</a></li>
+                    <li><a href="about.html">About ARMIET</a></li>
+                    <li><a href="contact.html">Contact Office</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Administration</h4>
+                <ul>
+                    <li><a href="admin/login.html">Admin Portal Login</a></li>
+                    <li><a href="club-register.html">Club Membership Form</a></li>
+                    <li><a href="event-register.html">Event Registration Form</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Alamuri Ratnamala Institute of Engineering & Technology (ARMIET). All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDynamicStats();
+            loadClubs('featured-clubs-container', 4);
+            loadEvents('upcoming-events-container', 4, true);
+        });
+    </script>
+</body>
+</html>

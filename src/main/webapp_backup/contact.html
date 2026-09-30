@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - ARMIET</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Institutional Top Notice Bar -->
+    <div class="top-notice-bar">
+        Alamuri Ratnamala Institute of Engineering & Technology <span>| A.S. Rao Nagar, Vill. Sapgaon, Tal. Shahapur, Dist. Thane ? 421601</span>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="brand-badge">ARMIET</span>
+                <div class="brand-titles">
+                    <span class="brand-college-name">Alamuri Ratnamala Institute of Engineering & Technology</span>
+                    <span class="brand-portal-title">Student Club & Event Management Portal</span>
+                </div>
+            </a>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation">?</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="clubs.html">Clubs</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="my-registrations.html">My Registrations</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><a href="admin/login.html" class="admin-btn">Admin Portal</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="page-header">
+            <h1>Contact Student Activities Cell</h1>
+            <p>For inquiries regarding club registrations, upcoming competitions, or event coordination at ARMIET.</p>
+        </div>
+
+        <div class="detail-grid" style="max-width: 1000px; margin: 0 auto;">
+            <div>
+                <div class="form-card" style="margin: 0;">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Send an Inquiry</h3>
+                    <div id="contact-feedback"></div>
+                    <form id="contact-form" onsubmit="event.preventDefault(); document.getElementById('contact-feedback').innerHTML = '<div class=\'alert alert-success\'>Thank you for contacting us. Your message has been received by the Student Activities Office.</div>'; this.reset();">
+                        <div class="form-group">
+                            <label class="form-label" for="cname">Your Full Name</label>
+                            <input type="text" id="cname" class="form-control" placeholder="e.g. Samiksha Dhawale" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="cemail">Your Email Address</label>
+                            <input type="email" id="cemail" class="form-control" placeholder="student@gmail.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="subject">Subject</label>
+                            <input type="text" id="subject" class="form-control" placeholder="Inquiry about Club Registration / Event" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="cmessage">Message</label>
+                            <textarea id="cmessage" class="form-control" rows="4" placeholder="Type your query here..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Inquiry</button>
+                    </form>
+                </div>
+            </div>
+
+            <div>
+                <div class="sidebar-box">
+                    <h3>Campus Directory</h3>
+                    <div>
+                        <strong>Institute Campus</strong>
+                        <p style="color: var(--text-main); font-weight: 500;">Alamuri Ratnamala Institute of Engineering & Technology (ARMIET)</p>
+                    </div>
+                    <div>
+                        <strong>Address</strong>
+                        <p style="color: var(--text-muted); line-height: 1.5;">
+                            A.S. Rao Nagar, Vill. Sapgaon,<br>
+                            Tal. Shahapur, Dist. Thane ? 421601,<br>
+                            Maharashtra, India
+                        </p>
+                    </div>
+                    <div>
+                        <strong>Office Hours</strong>
+                        <p style="color: var(--text-muted);">
+                            Monday ? Friday: 9:00 AM ? 5:00 PM<br>
+                            Saturday: 9:00 AM ? 1:00 PM
+                        </p>
+                    </div>
+                    <div>
+                        <strong>Student Activities Cell</strong>
+                        <p style="color: var(--text-muted);">Administrative Block, ARMIET Campus</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>ARMIET Campus Portal</h4>
+                <p><strong>Alamuri Ratnamala Institute of Engineering & Technology</strong></p>
+                <div class="footer-address">
+                    A.S. Rao Nagar, Vill. Sapgaon, Tal. Shahapur, Dist. Thane ? 421601
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="clubs.html">Browse Clubs</a></li>
+                    <li><a href="events.html">Campus Events</a></li>
+                    <li><a href="my-registrations.html">My Registrations</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Administration</h4>
+                <ul>
+                    <li><a href="admin/login.html">Admin Login</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Alamuri Ratnamala Institute of Engineering & Technology (ARMIET). All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

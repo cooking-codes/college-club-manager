@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join a Club - ARMIET Student Registration</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Institutional Top Notice Bar -->
+    <div class="top-notice-bar">
+        Alamuri Ratnamala Institute of Engineering & Technology <span>| A.S. Rao Nagar, Vill. Sapgaon, Tal. Shahapur, Dist. Thane ? 421601</span>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="brand-badge">ARMIET</span>
+                <div class="brand-titles">
+                    <span class="brand-college-name">Alamuri Ratnamala Institute of Engineering & Technology</span>
+                    <span class="brand-portal-title">Student Club & Event Management Portal</span>
+                </div>
+            </a>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation">?</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="clubs.html" class="active">Clubs</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="my-registrations.html">My Registrations</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="admin/login.html" class="admin-btn">Admin Portal</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container">
+        <div class="page-header">
+            <h1>Club Membership Application</h1>
+            <p>Join an official student society at ARMIET to collaborate, organize competitions, and gain valuable technical skills.</p>
+        </div>
+
+        <div class="form-card">
+            <!-- Alert message container -->
+            <div id="registration-alert"></div>
+
+            <form id="club-register-form" action="register-club" method="POST">
+                <div class="form-group">
+                    <label class="form-label" for="clubId">Select Club <span class="req">*</span></label>
+                    <select name="clubId" id="clubId" class="form-control" required>
+                        <option value="">-- Choose a Club --</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="fullName">Student Full Name <span class="req">*</span></label>
+                    <input type="text" id="fullName" name="fullName" class="form-control" placeholder="e.g. Samiksha Dhawale" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email Address <span class="req">*</span></label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="student@gmail.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="phone">10-Digit Mobile Number <span class="req">*</span></label>
+                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="9876543210" pattern="[0-9]{10}" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="department">Academic Department <span class="req">*</span></label>
+                        <select id="department" name="department" class="form-control" required>
+                            <option value="">-- Select Department --</option>
+                            <option value="Computer Engineering">Computer Engineering</option>
+                            <option value="Information Technology">Information Technology</option>
+                            <option value="Artificial Intelligence & Data Science">Artificial Intelligence & Data Science</option>
+                            <option value="Electronics & Telecommunication">Electronics & Telecommunication</option>
+                            <option value="Mechanical Engineering">Mechanical Engineering</option>
+                            <option value="Civil Engineering">Civil Engineering</option>
+                            <option value="Electrical Engineering">Electrical Engineering</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="engineeringYear">Engineering Year <span class="req">*</span></label>
+                        <select id="engineeringYear" name="engineeringYear" class="form-control" required>
+                            <option value="">-- Select Year --</option>
+                            <option value="FE">First Year (FE)</option>
+                            <option value="SE">Second Year (SE)</option>
+                            <option value="TE">Third Year (TE)</option>
+                            <option value="BE">Final Year (BE)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="division">Division / Class Section <span class="req">*</span></label>
+                        <input type="text" id="division" name="division" class="form-control" placeholder="e.g. A, B, C" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="rollNumber">College Roll Number / Student ID <span class="req">*</span></label>
+                        <input type="text" id="rollNumber" name="rollNumber" class="form-control" placeholder="e.g. ARMIET/3036" required>
+                    </div>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.8rem;">
+                        Submit Membership Application
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>ARMIET Campus Portal</h4>
+                <p><strong>Alamuri Ratnamala Institute of Engineering & Technology</strong></p>
+                <div class="footer-address">
+                    A.S. Rao Nagar, Vill. Sapgaon, Tal. Shahapur, Dist. Thane ? 421601
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="clubs.html">Browse Clubs</a></li>
+                    <li><a href="events.html">Campus Events</a></li>
+                    <li><a href="my-registrations.html">My Registrations</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Admin</h4>
+                <ul>
+                    <li><a href="admin/login.html">Admin Login</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Alamuri Ratnamala Institute of Engineering & Technology (ARMIET). All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const clubIdParam = getUrlParam('clubId');
+            populateClubDropdown('clubId', clubIdParam);
+            handleRegistrationSubmit('club-register-form', '/register-club', 'registration-alert');
+            checkUrlStatus('registration-alert');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Events - ARMIET</title>
+    <link rel="stylesheet" href="css/style.css?v=20260926">
+</head>
+<body>
+
+    <!-- Institutional Top Notice Bar -->
+    <div class="top-notice-bar">
+        Alamuri Ratnamala Institute of Engineering & Technology <span>| A.S. Rao Nagar, Vill. Sapgaon, Tal. Shahapur, Dist. Thane — 421601</span>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="brand-badge">ARMIET</span>
+                <div class="brand-titles">
+                    <span class="brand-college-name">Alamuri Ratnamala Institute of Engineering & Technology</span>
+                    <span class="brand-portal-title">Student Club & Event Management Portal</span>
+                </div>
+            </a>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation"><span aria-hidden="true">☰</span></button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="clubs.html">Clubs</a></li>
+                <li><a href="events.html" class="active">Events</a></li>
+                <li><a href="my-registrations.html">My Registrations</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="admin/login.html" class="admin-btn">Admin Portal</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container">
+        <div class="page-header">
+            <h1>Campus Events & Competitions</h1>
+            <p>Participate in technical hackathons, cultural festivals, sports tournaments, and expert guest lectures across ARMIET departments.</p>
+        </div>
+
+        <!-- Search & Club Filter Bar -->
+        <div class="search-filter-bar">
+            <div class="search-box">
+                <input type="text" id="event-search-input" placeholder="Search events by name, venue, or keyword...">
+            </div>
+            <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+                <select id="event-club-filter" class="form-control" style="width: auto; min-width: 200px;">
+                    <option value="">All Organizing Clubs</option>
+                </select>
+                <button class="filter-btn active" id="upcoming-filter-toggle">Upcoming Events</button>
+            </div>
+        </div>
+
+        <!-- Dynamic Events Grid (Loaded from MySQL) -->
+        <div class="cards-grid" id="events-container"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>ARMIET Campus Portal</h4>
+                <p><strong>Alamuri Ratnamala Institute of Engineering & Technology</strong></p>
+                <div class="footer-address">
+                    A.S. Rao Nagar, Vill. Sapgaon, Tal. Shahapur, Dist. Thane — 421601
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="clubs.html">Browse Clubs</a></li>
+                    <li><a href="events.html">Campus Events</a></li>
+                    <li><a href="event-register.html">Event Registration</a></li>
+                    <li><a href="my-registrations.html">My Registrations</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Admin</h4>
+                <ul>
+                    <li><a href="admin/login.html">Admin Login</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Alamuri Ratnamala Institute of Engineering & Technology (ARMIET). All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js?v=20260926"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let upcomingOnly = true;
+            let searchQuery = '';
+            let selectedClub = '';
+
+            const toggleBtn = document.getElementById('upcoming-filter-toggle');
+            const searchInput = document.getElementById('event-search-input');
+            const clubFilter = document.getElementById('event-club-filter');
+
+            populateClubDropdown('event-club-filter');
+
+            function refresh() {
+                loadEvents('events-container', null, upcomingOnly, searchQuery, selectedClub);
+            }
+
+            refresh();
+
+            toggleBtn.addEventListener('click', () => {
+                upcomingOnly = !upcomingOnly;
+                toggleBtn.classList.toggle('active', upcomingOnly);
+                toggleBtn.textContent = upcomingOnly — 'Upcoming Events' : 'All Events';
+                refresh();
+            });
+
+            let debounceTimer;
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    searchQuery = e.target.value.trim();
+                    refresh();
+                }, 300);
+            });
+
+            clubFilter.addEventListener('change', (e) => {
+                selectedClub = e.target.value;
+                refresh();
+            });
+        });
+    </script>
+</body>
+</html>

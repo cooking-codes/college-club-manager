@@ -1,0 +1,287 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List, com.collegeclub.model.Admin, com.collegeclub.model.Club" %>
+<%
+    Admin currentAdmin = (Admin) session.getAttribute("admin");
+    if (currentAdmin == null) {
+        response.sendRedirect("login.html?error=Session+expired.+Please+login.");
+        return;
+    }
+    @SuppressWarnings("unchecked")
+    List<Club> clubs = (List<Club>) request.getAttribute("clubs");
+    String status = request.getParameter("status");
+    String msg = request.getParameter("msg");
+%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Clubs - Admin Portal</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="dashboard" class="nav-logo">
+                <span class="brand-badge">ARMIET</span>
+                <div class="brand-titles">
+                    <span class="brand-college-name">ARMIET Administration</span>
+                    <span class="brand-portal-title">Club & Event Management Portal</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="dashboard">Dashboard</a></li>
+                <li><a href="clubs" class="active">Manage Clubs</a></li>
+                <li><a href="events">Manage Events</a></li>
+                <li><a href="registrations">Registrations</a></li>
+                <li><a href="../index.html" target="_blank">View Site ↗</a></li>
+                <li><a href="logout" class="btn btn-danger btn-sm" style="color: white;">Logout</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="page-header" style="text-align: left; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div>
+                <h1>Manage College Clubs</h1>
+                <p>Add, update, or remove student societies. All operations utilize pure Java DAOs and JDBC PreparedStatements.</p>
+            </div>
+            <button class="btn btn-primary" onclick="openAddModal()">+ Add New Club</button>
+        </div>
+
+        <!-- Feedback Alert -->
+        <% if (msg != null && !msg.trim().isEmpty()) { %>
+            <div class="alert <%= "success".equalsIgnoreCase(status) ? "alert-success" : "alert-danger" %>">
+                <span><%= msg %></span>
+            </div>
+        <% } %>
+
+        <!-- Search Bar -->
+        <div class="search-filter-bar">
+            <form action="clubs" method="GET" style="display: flex; gap: 1rem; width: 100%; flex-wrap: wrap;">
+                <div class="search-box" style="flex: 2;">
+                    <input type="text" name="q" placeholder="Search clubs..." value="<%= request.getParameter("q") != null ? request.getParameter("q") : "" %>">
+                </div>
+                <div style="flex: 1; min-width: 180px;">
+                    <select name="category" class="form-control" onchange="this.form.submit()">
+                        <option value="">All Categories</option>
+                        <option value="Technology" <%= "Technology".equals(request.getParameter("category")) ? "selected" : "" %>>Technology</option>
+                        <option value="Arts & Culture" <%= "Arts & Culture".equals(request.getParameter("category")) ? "selected" : "" %>>Arts & Culture</option>
+                        <option value="Sports & Fitness" <%= "Sports & Fitness".equals(request.getParameter("category")) ? "selected" : "" %>>Sports & Fitness</option>
+                        <option value="Literature" <%= "Literature".equals(request.getParameter("category")) ? "selected" : "" %>>Literature</option>
+                        <option value="Media & Arts" <%= "Media & Arts".equals(request.getParameter("category")) ? "selected" : "" %>>Media</option>
+                        <option value="Business & Innovation" <%= "Business & Innovation".equals(request.getParameter("category")) ? "selected" : "" %>>Entrepreneurship</option>
+                        <option value="Engineering & Hardware" <%= "Engineering & Hardware".equals(request.getParameter("category")) ? "selected" : "" %>>Robotics</option>
+                        <option value="Music & Performing Arts" <%= "Music & Performing Arts".equals(request.getParameter("category")) ? "selected" : "" %>>Music</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-outline btn-sm">Filter</button>
+                <a href="clubs" class="btn btn-secondary btn-sm" style="color: var(--text-muted); border-color: var(--border-color);">Reset</a>
+            </form>
+        </div>
+
+        <!-- Clubs Table -->
+        <div class="table-responsive">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Club Name</th>
+                        <th>Category</th>
+                        <th>Faculty In-Charge</th>
+                        <th>Student Lead</th>
+                        <th>Schedule & Venue</th>
+                        <th>Members</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%
+                        if (clubs != null && !clubs.isEmpty()) {
+                            for (Club c : clubs) {
+                    %>
+                    <tr>
+                        <td><%= c.getId() %></td>
+                        <td><strong><%= c.getName() %></strong><br><small style="color: var(--text-muted);"><%= c.getContactEmail() %></small></td>
+                        <td><span class="card-badge"><%= c.getCategory() %></span></td>
+                        <td><%= c.getFacultyCoordinator() %></td>
+                        <td><%= c.getStudentCoordinator() %></td>
+                        <td><small><%= c.getMeetingDay() %> <%= c.getMeetingTime() %><br><%= c.getLocation() %></small></td>
+                        <td><strong><%= c.getMemberCount() %></strong></td>
+                        <td>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <button class="btn btn-outline btn-sm" onclick='openEditModal(<%= JsonUtilScript(c) %>)'>Edit</button>
+                                <form action="clubs" method="POST" onsubmit="return confirm('Are you sure you want to delete club <%= c.getName() %>? All associated events and registrations will also be removed.');" style="display: inline;">
+                                    <input type="hidden" name="action" value="delete">
+                                    <input type="hidden" name="id" value="<%= c.getId() %>">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    <%
+                            }
+                        } else {
+                    %>
+                    <tr>
+                        <td colspan="8" style="text-align: center; color: var(--text-muted); padding: 2rem;">No clubs found. Click "+ Add New Club" above to create one.</td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Modal: Add / Edit Club -->
+    <div class="modal-overlay" id="club-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title" style="color: var(--primary-dark);">Add New Club</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="club-form" action="clubs" method="POST">
+                <input type="hidden" name="action" id="form-action" value="create">
+                <input type="hidden" name="id" id="club-id" value="">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Club Name <span class="req">*</span></label>
+                        <input type="text" name="name" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Category <span class="req">*</span></label>
+                        <select name="category" id="category" class="form-control" required>
+                            <option value="Technology">Technology</option>
+                            <option value="Arts & Culture">Arts & Culture</option>
+                            <option value="Sports & Fitness">Sports & Fitness</option>
+                            <option value="Literature">Literature</option>
+                            <option value="Media & Arts">Media & Arts</option>
+                            <option value="Business & Innovation">Business & Innovation</option>
+                            <option value="Engineering & Hardware">Engineering & Hardware</option>
+                            <option value="Music & Performing Arts">Music & Performing Arts</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Description <span class="req">*</span></label>
+                    <textarea name="description" id="description" class="form-control" rows="2" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Objectives <span class="req">*</span></label>
+                    <textarea name="objectives" id="objectives" class="form-control" rows="2" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Activities & Initiatives <span class="req">*</span></label>
+                    <textarea name="activities" id="activities" class="form-control" rows="2" required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Faculty Coordinator <span class="req">*</span></label>
+                        <input type="text" name="facultyCoordinator" id="facultyCoordinator" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Student Coordinator <span class="req">*</span></label>
+                        <input type="text" name="studentCoordinator" id="studentCoordinator" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Meeting Day</label>
+                        <input type="text" name="meetingDay" id="meetingDay" class="form-control" placeholder="e.g. Wednesday">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Meeting Time</label>
+                        <input type="text" name="meetingTime" id="meetingTime" class="form-control" placeholder="e.g. 4:00 PM - 6:00 PM">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Location / Lab</label>
+                        <input type="text" name="location" id="location" class="form-control" placeholder="e.g. Lab 3, Tech Block">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Contact Email <span class="req">*</span></label>
+                        <input type="email" name="contactEmail" id="contactEmail" class="form-control" required>
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem;">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()" style="color: var(--text-muted); border-color: var(--border-color);">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="save-btn">Save Club</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Helper script for modal -->
+    <script>
+        const modal = document.getElementById('club-modal');
+        const form = document.getElementById('club-form');
+        const modalTitle = document.getElementById('modal-title');
+        const formAction = document.getElementById('form-action');
+
+        function openAddModal() {
+            modalTitle.textContent = 'Add New Club';
+            formAction.value = 'create';
+            form.reset();
+            document.getElementById('club-id').value = '';
+            modal.classList.add('active');
+        }
+
+        function openEditModal(c) {
+            modalTitle.textContent = 'Edit Club: ' + c.name;
+            formAction.value = 'update';
+            document.getElementById('club-id').value = c.id;
+            document.getElementById('name').value = c.name;
+            document.getElementById('category').value = c.category;
+            document.getElementById('description').value = c.description;
+            document.getElementById('objectives').value = c.objectives;
+            document.getElementById('activities').value = c.activities;
+            document.getElementById('facultyCoordinator').value = c.facultyCoordinator;
+            document.getElementById('studentCoordinator').value = c.studentCoordinator;
+            document.getElementById('meetingDay').value = c.meetingDay;
+            document.getElementById('meetingTime').value = c.meetingTime;
+            document.getElementById('location').value = c.location;
+            document.getElementById('contactEmail').value = c.contactEmail;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+        }
+    </script>
+
+</body>
+</html>
+<%!
+    // Helper method to safely pass Club object to JavaScript JSON literal
+    private String JsonUtilScript(Club c) {
+        return "{" +
+            "id:" + c.getId() + "," +
+            "name:" + escapeJs(c.getName()) + "," +
+            "category:" + escapeJs(c.getCategory()) + "," +
+            "description:" + escapeJs(c.getDescription()) + "," +
+            "objectives:" + escapeJs(c.getObjectives()) + "," +
+            "activities:" + escapeJs(c.getActivities()) + "," +
+            "facultyCoordinator:" + escapeJs(c.getFacultyCoordinator()) + "," +
+            "studentCoordinator:" + escapeJs(c.getStudentCoordinator()) + "," +
+            "meetingDay:" + escapeJs(c.getMeetingDay()) + "," +
+            "meetingTime:" + escapeJs(c.getMeetingTime()) + "," +
+            "location:" + escapeJs(c.getLocation()) + "," +
+            "contactEmail:" + escapeJs(c.getContactEmail()) +
+        "}";
+    }
+
+    private String escapeJs(String s) {
+        if (s == null) return "''";
+        return "'" + s.replace("\\", "\\\\").replace("'", "\\'").replace("\n", "\\n").replace("\r", "") + "'";
+    }
+%>

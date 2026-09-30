@@ -1,0 +1,14 @@
+# Database credentials
+src/main/resources/db.properties
+
+# Build output
+target/
+build/
+
+# IDE files
+.classpath
+.project
+.settings/
+
+# Environment files
+.env

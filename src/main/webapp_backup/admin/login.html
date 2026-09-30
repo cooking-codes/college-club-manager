@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrator Login - ARMIET Portal</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body style="background: linear-gradient(135deg, var(--charcoal-dark) 0%, var(--primary-dark) 100%); display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 1.5rem;">
+
+    <div class="form-card" style="width: 100%; max-width: 440px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); border-top: 4px solid var(--gold);">
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <div class="brand-badge" style="margin-bottom: 0.75rem; font-size: 1.25rem;">
+                ARMIET
+            </div>
+            <h2 style="color: var(--primary); font-size: 1.6rem; margin-top: 0.25rem;">Administrator Portal</h2>
+            <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 0.35rem;">Alamuri Ratnamala Institute of Engineering & Technology</p>
+        </div>
+
+        <div id="login-alert"></div>
+
+        <form action="login" method="POST">
+            <div class="form-group">
+                <label class="form-label" for="username">Admin Username</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Enter admin username" required autofocus>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="????????" required>
+            </div>
+
+            <div style="margin-top: 1.75rem;">
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem;">
+                    Authenticate & Sign In
+                </button>
+            </div>
+        </form>
+
+        <div style="text-align: center; margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border-color);">
+            <a href="../index.html" style="color: var(--primary); text-decoration: none; font-size: 0.9rem; font-weight: 600;">&larr; Back to Student Portal</a>
+        </div>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const error = params.get('error');
+        const logout = params.get('logout');
+        const alertBox = document.getElementById('login-alert');
+
+        if (error) {
+            alertBox.innerHTML = `<div class="alert alert-danger"><span>${decodeURIComponent(error)}</span></div>`;
+        } else if (logout) {
+            alertBox.innerHTML = `<div class="alert alert-success"><span>You have been safely logged out.</span></div>`;
+        }
+    </script>
+</body>
+</html>

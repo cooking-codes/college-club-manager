@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - ARMIET</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Institutional Top Notice Bar -->
+    <div class="top-notice-bar">
+        Alamuri Ratnamala Institute of Engineering & Technology <span>| A.S. Rao Nagar, Vill. Sapgaon, Tal. Shahapur, Dist. Thane ? 421601</span>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="brand-badge">ARMIET</span>
+                <div class="brand-titles">
+                    <span class="brand-college-name">Alamuri Ratnamala Institute of Engineering & Technology</span>
+                    <span class="brand-portal-title">Student Club & Event Management Portal</span>
+                </div>
+            </a>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation">?</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="clubs.html">Clubs</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="my-registrations.html">My Registrations</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="admin/login.html" class="admin-btn">Admin Portal</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="page-header">
+            <h1>About ARMIET Club & Event Portal</h1>
+            <p>An institutional student activity management portal supporting co-curricular growth, technical learning, and community engagement.</p>
+        </div>
+
+        <div class="detail-container">
+            <div class="detail-section">
+                <h3>Alamuri Ratnamala Institute of Engineering & Technology (ARMIET)</h3>
+                <p style="margin-bottom: 1rem; line-height: 1.75;">
+                    Alamuri Ratnamala Institute of Engineering & Technology (ARMIET) is located in Shahapur, Thane, Maharashtra. The institute provides an academic environment focused on engineering education, technical skills, and holistic student development across undergraduate and postgraduate disciplines.
+                </p>
+                <p style="line-height: 1.75;">
+                    Beyond classroom instruction, ARMIET actively encourages students to take part in technical competitions, cultural festivals, athletic tournaments, and community welfare programs through recognized student bodies and chapters.
+                </p>
+            </div>
+
+            <div class="detail-section" style="margin-top: 2rem;">
+                <h3>Student Organizations & Activities</h3>
+                <p style="margin-bottom: 1rem; line-height: 1.75;">
+                    The institute hosts active student associations and units that provide opportunities for hands-on learning, teamwork, and social responsibility:
+                </p>
+                <ul class="card-details-list" style="font-size: 0.95rem; gap: 0.75rem;">
+                    <li><strong>MESA:</strong> <span>Mechanical Engineering Students Association coordinating Technical Quizzes, Design Contests, RoboRace, RoboWar, and Paper Presentations.</span></li>
+                    <li><strong>NSS Unit:</strong> <span>National Service Scheme organizing blood donation camps, cleanliness drives, and community awareness activities.</span></li>
+                    <li><strong>IEEE & ISTE:</strong> <span>Professional student branches conducting seminars, workshops, and technical symposiums.</span></li>
+                    <li><strong>Sports & Athletics:</strong> <span>Inter-departmental sporting events (Spardha) and physical fitness activities across campus facilities.</span></li>
+                </ul>
+            </div>
+
+            <div class="detail-section" style="margin-top: 2rem;">
+                <h3>Technical Architecture</h3>
+                <p style="margin-bottom: 1rem; line-height: 1.75;">
+                    The Student Club & Event Management Portal is built with an enterprise pure Java web architecture:
+                </p>
+                <ul class="card-details-list" style="font-size: 0.95rem; gap: 0.75rem;">
+                    <li><strong>Backend Core:</strong> Pure Java (JDK 17) with Jakarta Servlet API 6.0</li>
+                    <li><strong>Web Container:</strong> Apache Tomcat 10.1</li>
+                    <li><strong>Database:</strong> MySQL 8.0+ / 8.4 with relational foreign keys and unique constraints</li>
+                    <li><strong>Data Access:</strong> JDBC PreparedStatement implementations protecting against SQL injection</li>
+                    <li><strong>Frontend UI:</strong> Semantic HTML5, responsive CSS3 Grid & Flexbox, and vanilla JavaScript without heavy SPA bloat</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>ARMIET Campus Portal</h4>
+                <p><strong>Alamuri Ratnamala Institute of Engineering & Technology</strong></p>
+                <div class="footer-address">
+                    A.S. Rao Nagar, Vill. Sapgaon, Tal. Shahapur, Dist. Thane ? 421601
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="clubs.html">Browse Clubs</a></li>
+                    <li><a href="events.html">Campus Events</a></li>
+                    <li><a href="my-registrations.html">My Registrations</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Administration</h4>
+                <ul>
+                    <li><a href="admin/login.html">Admin Login</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Alamuri Ratnamala Institute of Engineering & Technology (ARMIET). All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

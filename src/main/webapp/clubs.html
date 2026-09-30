@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clubs & Organizations - ARMIET</title>
+    <link rel="stylesheet" href="css/style.css?v=20260926">
+</head>
+<body>
+
+    <!-- Institutional Top Notice Bar -->
+    <div class="top-notice-bar">
+        Alamuri Ratnamala Institute of Engineering & Technology <span>| A.S. Rao Nagar, Vill. Sapgaon, Tal. Shahapur, Dist. Thane — 421601</span>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="brand-badge">ARMIET</span>
+                <div class="brand-titles">
+                    <span class="brand-college-name">Alamuri Ratnamala Institute of Engineering & Technology</span>
+                    <span class="brand-portal-title">Student Club & Event Management Portal</span>
+                </div>
+            </a>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation"><span aria-hidden="true">☰</span></button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="clubs.html" class="active">Clubs</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="my-registrations.html">My Registrations</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="admin/login.html" class="admin-btn">Admin Portal</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container">
+        <div class="page-header">
+            <h1>Campus Clubs & Societies</h1>
+            <p>Connect with peers, hone software & hardware skills, and develop leadership through ARMIET student-led organizations.</p>
+        </div>
+
+        <!-- Search & Category Filters -->
+        <div class="search-filter-bar">
+            <div class="search-box">
+                <input type="text" id="club-search-input" placeholder="Search clubs by name, activities, or keywords...">
+            </div>
+            <div class="filter-categories" id="category-filter-group">
+                <button class="filter-btn active" data-category="All">All Categories</button>
+                <button class="filter-btn" data-category="Technology">Technology</button>
+                <button class="filter-btn" data-category="Arts & Culture">Arts & Culture</button>
+                <button class="filter-btn" data-category="Sports & Fitness">Sports & Fitness</button>
+                <button class="filter-btn" data-category="Literature">Literature</button>
+                <button class="filter-btn" data-category="Media & Arts">Media</button>
+                <button class="filter-btn" data-category="Business & Innovation">Entrepreneurship</button>
+                <button class="filter-btn" data-category="Engineering & Hardware">Robotics</button>
+                <button class="filter-btn" data-category="Music & Performing Arts">Music</button>
+            </div>
+        </div>
+
+        <!-- Dynamic Clubs Cards Grid (Loaded from MySQL) -->
+        <div class="cards-grid" id="clubs-container"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>ARMIET Campus Portal</h4>
+                <p><strong>Alamuri Ratnamala Institute of Engineering & Technology</strong></p>
+                <p>Student Club & Event Management Portal.</p>
+                <div class="footer-address">
+                    A.S. Rao Nagar, Vill. Sapgaon, Tal. Shahapur, Dist. Thane — 421601
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="clubs.html">All Clubs</a></li>
+                    <li><a href="events.html">Campus Events</a></li>
+                    <li><a href="my-registrations.html">My Registrations</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support & Admin</h4>
+                <ul>
+                    <li><a href="admin/login.html">Admin Access</a></li>
+                    <li><a href="contact.html">Campus Help Desk</a></li>
+                    <li><a href="about.html">About Portal</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Alamuri Ratnamala Institute of Engineering & Technology (ARMIET). All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js?v=20260926"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let activeCategory = 'All';
+            let searchQuery = '';
+
+            function refresh() {
+                loadClubs('clubs-container', null, activeCategory, searchQuery);
+            }
+
+            refresh();
+
+            const searchInput = document.getElementById('club-search-input');
+            let debounceTimer;
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    searchQuery = e.target.value.trim();
+                    refresh();
+                }, 300);
+            });
+
+            const categoryBtns = document.querySelectorAll('#category-filter-group .filter-btn');
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    activeCategory = btn.getAttribute('data-category');
+                    refresh();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
