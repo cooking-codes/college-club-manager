@@ -62,6 +62,43 @@ public class RegistrationDAO {
         }
     }
 
+    public ClubRegistration findClubRegistrationById(int registrationId) throws SQLException {
+        String sql =
+                "SELECT cr.*, s.full_name, s.email, s.phone, s.department, s.engineering_year, " +
+                "s.division, s.roll_number, c.name AS club_name, c.category AS club_category " +
+                "FROM club_registrations cr " +
+                "JOIN students s ON cr.student_id = s.id " +
+                "JOIN clubs c ON cr.club_id = c.id " +
+                "WHERE cr.id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, registrationId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (!rs.next()) {
+                    return null;
+                }
+                ClubRegistration cr = new ClubRegistration(
+                        rs.getInt("id"),
+                        rs.getInt("student_id"),
+                        rs.getInt("club_id"),
+                        rs.getTimestamp("registration_date"),
+                        rs.getString("status")
+                );
+                cr.setStudentName(rs.getString("full_name"));
+                cr.setStudentEmail(rs.getString("email"));
+                cr.setStudentPhone(rs.getString("phone"));
+                cr.setStudentDepartment(rs.getString("department"));
+                cr.setStudentYear(rs.getString("engineering_year"));
+                cr.setStudentDivision(rs.getString("division"));
+                cr.setStudentRollNumber(rs.getString("roll_number"));
+                cr.setClubName(rs.getString("club_name"));
+                cr.setClubCategory(rs.getString("club_category"));
+                return cr;
+            }
+        }
+    }
+
     public List<ClubRegistration> findAllClubRegistrations() throws SQLException {
         return searchClubRegistrations(null, null);
     }

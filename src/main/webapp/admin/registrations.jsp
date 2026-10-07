@@ -120,6 +120,7 @@
                             <th>Registered Club</th>
                             <th>Date</th>
                             <th>Status</th>
+                            <th>Certificate</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -136,13 +137,20 @@
                             <td><strong><%= cr.getClubName() %></strong><br><small style="color: var(--text-muted);"><%= cr.getClubCategory() %></small></td>
                             <td><small><%= cr.getRegistrationDate() %></small></td>
                             <td><span class="card-badge badge-upcoming"><%= cr.getStatus() %></span></td>
+                            <td>
+                                <% if ("Approved".equalsIgnoreCase(cr.getStatus())) { %>
+                                    <a class="btn btn-certificate btn-sm" href="certificate?registrationId=<%= cr.getId() %>">Generate PDF</a>
+                                <% } else { %>
+                                    <span style="color: var(--muted); font-size: 0.78rem;">Available after approval</span>
+                                <% } %>
+                            </td>
                         </tr>
                         <%
                                 }
                             } else {
                         %>
                         <tr>
-                            <td colspan="8" style="text-align: center; color: var(--text-muted); padding: 2rem;">No club registrations found.</td>
+                            <td colspan="9" style="text-align: center; color: var(--text-muted); padding: 2rem;">No club registrations found.</td>
                         </tr>
                         <% } %>
                     </tbody>

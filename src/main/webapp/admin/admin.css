@@ -78,19 +78,22 @@ body {
 }
 
 .brand-badge {
-    width: 50px;
-    height: 50px;
+    width: 145px;
+    height: 52px;
 
-    display: grid;
-    place-items: center;
+    display: block;
 
-    border-radius: 50%;
-    background: var(--maroon);
-    border: 2px solid var(--gold);
+    background-image: url("../images/armiet-logo.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 
-    color: var(--white);
-    font-size: 0.8rem;
-    font-weight: 900;
+    border: none;
+    border-radius: 0;
+
+    font-size: 0;
+    color: transparent;
+    flex-shrink: 0;
 }
 
 .brand-titles {
@@ -358,6 +361,23 @@ body {
 .badge-closed {
     background: var(--danger-bg);
     color: var(--danger);
+}
+
+
+/* ---------- Certificate action ---------- */
+
+.btn-certificate {
+    background: linear-gradient(135deg, var(--maroon), #8f2342);
+    color: var(--white) !important;
+    border-color: var(--gold);
+    white-space: nowrap;
+    font-size: 0.78rem;
+    padding: 8px 11px;
+}
+
+.btn-certificate:hover {
+    background: linear-gradient(135deg, var(--maroon-dark), var(--maroon));
+    color: var(--gold-bright) !important;
 }
 
 /* ---------- Footer ---------- */

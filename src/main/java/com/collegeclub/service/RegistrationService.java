@@ -157,6 +157,10 @@ public class RegistrationService {
         return registrationDAO.registerEvent(studentId, eventId);
     }
 
+    public ClubRegistration getClubRegistrationById(int registrationId) throws SQLException {
+        return registrationDAO.findClubRegistrationById(registrationId);
+    }
+
     public List<ClubRegistration> getClubRegistrations(String query, Integer clubId) throws SQLException {
         return registrationDAO.searchClubRegistrations(query, clubId);
     }
